@@ -1,0 +1,78 @@
+matches:
+  - trigger: "jgtrig"
+    replace: "{{trigger_list}}"
+    vars:
+      - name: trigger_list
+        type: script
+        params:
+          args:
+            - "C:\\Users\\jrgarrig\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe"
+            - -c
+            - |
+              import os
+              import yaml
+              import tkinter as tk
+              from tkinter import simpledialog, messagebox
+
+              def get_yaml_files(directory):
+                  return [f[:-4] for f in os.listdir(directory) if f.endswith('.yml')]
+
+              def get_triggers(file_path):
+                  triggers = []
+                  with open(file_path, 'r', encoding='utf-8') as file:
+                      try:
+                          data = yaml.safe_load(file)
+                          if isinstance(data, dict) and 'matches' in data:
+                              for match in data['matches']:
+                                  if isinstance(match, dict) and 'trigger' in match:
+                                      triggers.append(match['trigger'])
+                      except yaml.YAMLError:
+                          pass  # Skip files with YAML errors
+                  return sorted(triggers)
+
+              def show_file_selection(files):
+                  root = tk.Tk()
+                  root.withdraw()
+                  root.attributes('-topmost', True)  # Make window appear on top
+                  result = simpledialog.askstring("Select File", "Choose a YAML file (or press Cancel to exit):\n" + "\n".join(files))
+                  root.destroy()
+                  return result
+
+              def show_triggers(triggers):
+                  root = tk.Tk()
+                  root.withdraw()
+                  root.attributes('-topmost', True)  # Make window appear on top
+                  messagebox.showinfo("Triggers", "\n".join(triggers))
+                  root.destroy()
+
+              def main():
+                  directory = "C:\\Users\\jrgarrig\\AppData\\Roaming\\espanso\\match\\user"
+                  while True:
+                      files = get_yaml_files(directory)
+                      selected_file = show_file_selection(files)
+                      
+                      if selected_file is None:  # User pressed Cancel or closed the dialog
+                          break
+                      
+                      if selected_file not in files:
+                          root = tk.Tk()
+                          root.withdraw()
+                          root.attributes('-topmost', True)
+                          messagebox.showerror("Error", "Invalid file selection.")
+                          root.destroy()
+                          continue
+                      
+                      file_path = os.path.join(directory, selected_file + '.yml')
+                      triggers = get_triggers(file_path)
+                      
+                      if triggers:
+                          show_triggers(triggers)
+                      else:
+                          root = tk.Tk()
+                          root.withdraw()
+                          root.attributes('-topmost', True)
+                          messagebox.showinfo("Info", "No triggers found in this file.")
+                          root.destroy()
+
+              main()
+              print("")  # Print empty string so Espanso doesn't replace with anything

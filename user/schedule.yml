@@ -1,6 +1,4 @@
-# Snippets for daily schedule and task management
 matches:
-
   - trigger: "jgdaily"
     replace: "{{day_info}}"
     vars:
@@ -14,6 +12,10 @@ matches:
               import datetime
               import os
               import re
+              import sys
+
+              # Set the console output encoding to UTF-8
+              sys.stdout.reconfigure(encoding='utf-8')
 
               today = datetime.datetime.now()
               date_str = today.strftime("%A, %Y-%m-%d")
@@ -78,7 +80,7 @@ matches:
                       
                       # Find the first day entry (most recent)
                       # Look for a date pattern like "Monday, 2025-04-28"
-                      day_pattern = r'\w+, \d{4}-\d{2}-\d{2}' # Escaped for YAML
+                      day_pattern = r'\w+, \d{4}-\d{2}-\d{2}'
                       day_matches = re.finditer(day_pattern, content)
                       
                       # Get the positions of the first two day headers
@@ -101,7 +103,7 @@ matches:
                           # Find all lines containing "ToDo -" in the most recent day
                           # and ignore lines starting with "SBI - "
                           todo_items = []
-                          for line in most_recent_day.split('\n'): # Escaped for YAML
+                          for line in most_recent_day.split('\n'):
                               if re.search(r'todo - ', line.strip(), re.IGNORECASE) and not line.strip().startswith("SBI - "):
                                   todo_items.append(line.strip())
                           
@@ -116,14 +118,18 @@ matches:
               todo_items = get_todo_items_from_file()
               
               # Format the basic output
-              output = f"{date_str}\\n{start_time} - {lunch_start} - {lunch_end} - {end_time} ({hours})\\nAdmin - NAMS - 0\\nCybersecurity - RISCS - 0" # Escaped for YAML
+              output = f"{date_str}\n{start_time} - {lunch_start} - {lunch_end} - {end_time} ({hours})\nAdmin - NAMS - 0\nCybersecurity - RISCS - 0"
               
               # Add ToDo items right after the basic info
               for todo in todo_items:
-                  output += f"\\n{todo}" # Escaped for YAML
+                  output += f"\n{todo}"
               
               # Add each meeting on a new line after ToDo items
               for meeting in today_meetings:
-                  output += f"\\n{meeting}" # Escaped for YAML
+                  output += f"\n{meeting}"
               
-              print(output)
+              # Print the output, handling potential encoding issues
+              try:
+                  print(output)
+              except UnicodeEncodeError:
+                  print(output.encode('utf-8', errors='ignore').decode('utf-8'))
