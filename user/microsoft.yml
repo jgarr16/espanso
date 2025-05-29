@@ -1,0 +1,20 @@
+# Snippets for Microsoft product names
+matches:
+
+  - trigger: "jgms"
+    replace: "Microsoft"
+
+  - trigger: "jgpp"
+    replace: "Power Platform"
+
+  - trigger: "jgpow"
+    replace: "Power Automate"
+
+  - trigger: "jgpa"
+    replace: "Power App"
+
+  - trigger: "jgsp"
+    replace: "SharePoint"
+
+  - trigger: jgpcard
+    replace: "ARC P-Card" # This was under MICROSOFT, keeping it here as per original structure.

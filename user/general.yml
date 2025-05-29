@@ -1,0 +1,65 @@
+# General purpose snippets
+matches:
+
+  # straight up replacements
+  - trigger: cypress
+    replace: CyPrESS
+
+  - trigger: chatgsfc
+    replace: ChatGSFC
+
+  - trigger: esd
+    replace: "Enterprise Service Desk (ESD)"
+
+  - trigger: poam
+    replace: POA&M
+
+  - trigger: rbd
+    replace: RBD
+
+  - trigger: webtads
+    replace: WebTADS
+
+  # Simple text replacements
+  - trigger: jggm
+    replace: "Good morning"
+
+  - trigger: jgchill
+    replace: "[Not Urgent]"
+
+  - trigger: jgesd
+    replace: "{{esd}} at 1-877-677-2123 or https://esd.nasa.gov/esdportal"
+    vars:
+    - name: esd
+      type: match
+      params:
+        trigger: "esd"
+
+  - trigger: jgsign
+    replace: "Thanks,\nJohn\n\n"
+
+  - trigger: "jgespanso"
+    replace: |
+      - trigger: 
+      	replace: 
+
+  - trigger: jgtest
+    replace: "jrgarrigues@yahoo.com"
+
+  - trigger: jgjk
+    replace: "#justkidding"
+
+  - trigger: "jgfrom"
+    replace: "from:garrigues "
+
+  - trigger: "jgsub"
+    replace: "subject:"
+    
+  - trigger: "jgboil"
+    replace: "boil it down to the bare minimum; just bullets; nothing else"
+
+  - trigger: "jgsnip"
+    replace: "<snipped to save space>"
+
+  - trigger: "jgweeklies"
+    replace: "subject:'Weekly Accomplishments'"
