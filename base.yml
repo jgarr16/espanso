@@ -1,29 +1,9 @@
-# espanso match file
+# espanso configuration file
 # For a complete introduction, visit the official docs at: https://espanso.org/docs/
 
 # This file loads all .yml files from the 'user' directory.
-# Make sure your categorized snippet files are placed in a subdirectory named 'user'.
-# For example, if this base.yml is in /path/to/config/espanso/
-# then your snippets should be in /path/to/config/espanso/user/
-
-# Note: Espanso typically automatically loads all *.yml files 
-# from a 'match' directory within its configuration directory.
-# If your 'base.yml' is inside the 'espanso' config folder,
-# and you create a 'user' subdirectory next to it (e.g. espanso/user/),
-# you might not need explicit loading if 'user' acts like 'match'.
-# However, to be explicit or if 'base.yml' is loaded from a custom path:
-
-# Placeholder for explicit loading if needed, otherwise Espanso's
-# default behavior of loading from a 'match' (or similarly named 'user')
-# subdirectory might suffice. For now, we'll keep it minimal.
-# If snippets don't load, we may need to add:
-# matches:
-#   - ../user/*.yml 
-# (The path depends on where Espanso considers the root for base.yml)
-# For now, we rely on Espanso's convention to auto-load from subdirectories
-# like 'match' or 'user' if they are correctly placed relative to the main config.
-# We will create the 'user' directory and files, and if they don't load,
-# we will update this file.
-
-# Add any global variables or configurations here if needed in the future.
-# For now, it primarily serves to ensure the 'user' directory is processed.
+# Ensure that the 'user' directory is in the same directory as this base.yml file.
+# For example, if base.yml is at: ~/.config/espanso/base.yml
+# The user directory should be at: ~/.config/espanso/user/
+matches:
+  - user/*.yml
