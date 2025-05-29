@@ -1,32 +1,37 @@
-# Espanso Configuration - base.yml
+# Espanso Configuration
 
-This repository contains `base.yml`, a configuration file for Espanso, a cross-platform text expander. This file defines a collection of custom text replacement snippets to improve productivity and consistency.
+This repository contains a configuration for Espanso, a cross-platform text expander. The snippets are organized into categorized YAML files for better manageability.
 
-## Overview of Snippets
+## Structure
 
-The `base.yml` file includes a variety of snippets, categorized as follows:
+The Espanso configuration is structured as follows:
 
-*   **Simple Text Replacements:** Common phrases and terms are shortened with easy-to-remember triggers. For instance, `jggm` expands to "Good morning".
-*   **Acronyms and Initialisms:** Provides quick expansions for frequently used acronyms, such_as `esd` becoming "Enterprise Service Desk (ESD)".
-*   **Dynamic Content:**
-    *   **Dates:** Triggers like `jgdate` (current date), `jgday` (current day of the week), `jgtomorrow`, and `jgyesterday` insert formatted dates.
-    *   **Shell Commands:** The `:shell` trigger can execute and display the output of shell commands.
-*   **Forms:**
-    *   The `SBI - ` or `sbi - ` trigger launches a form for structured feedback, prompting for "Employee Name," "Feedback Type," "Situation," "Behavior," and "Impact."
-*   **Contact Information:** Shortcuts for frequently used email addresses and phone numbers.
-*   **Cybersecurity:** A set of snippets for common phrases, email distribution lists, and recurring cybersecurity-related messages.
-*   **Microsoft Products:** Shortcuts for names like "Microsoft", "Power Platform", "Power Automate", etc.
-*   **Images & Emojis:**
-    *   Various triggers like `jgbeer` and `jgnnn` insert images directly.
-    *   The `jgmeatball` snippet uses a Python script to copy the NASA "meatball" logo to the clipboard, allowing it to be pasted into applications that support image pasting.
-    *   A collection of emoji snippets (e.g., `jglove` for ❤️, `jgrocket` for 🚀).
-*   **AI-Related Information:** Snippets to quickly share information about tools like `LibreChat`, `ChatGSFC`, and NASA's guidance on Generative AI.
-*   **Daily Schedule (`jgdaily`):**
-    *   This is a more advanced snippet that runs a Python script.
-    *   The script generates a daily schedule summary including:
-        *   The current date and pre-defined work hours.
-        *   A list of meetings scheduled for the current day of the week (meetings are defined within the script).
-        *   A "ToDo" list extracted from the most recent day's entry in a local Markdown file (`C:\Users\jrgarrig\Documents\Obsidian Vault\review.md`).
+*   **`base.yml`**: This is the main entry point for Espanso. It is configured to load all snippet files from the `user/` directory.
+*   **`user/` directory**: This directory contains all the actual snippet definition files, categorized by their purpose:
+    *   `ai.yml`: Snippets related to AI tools and guidance (e.g., ChatGSFC, LibreChat).
+    *   `contacts.yml`: Email distribution lists and personal contact information.
+    *   `cybersecurity.yml`: Snippets for cybersecurity-related phrases and actions.
+    *   `dynamic_content.yml`: Snippets that generate dynamic content like dates, times, or execute shell commands.
+    *   `forms.yml`: Form-based snippets (e.g., SBI feedback form).
+    *   `general.yml`: Common acronyms, initialisms, and simple text replacements.
+    *   `media.yml`: Snippets for inserting images and emojis, including a script to copy images to the clipboard.
+    *   `microsoft.yml`: Shortcuts for Microsoft product names.
+    *   `schedule.yml`: Contains the `jgdaily` snippet, which uses a Python script to generate a daily schedule summary, including meetings and ToDo items from a local file.
+*   **`base_archive.yml`**: A backup of the original monolithic `base.yml` file before it was refactored.
+
+## Overview of Snippet Categories
+
+The snippets are organized into the following categories within the `user/` directory:
+
+*   **AI (`ai.yml`):** Quick links and information about AI tools and NASA's GenAI guidance.
+*   **Contacts (`contacts.yml`):** Collections of email addresses for distribution and personal contact details.
+*   **Cybersecurity (`cybersecurity.yml`):** Common phrases and responses for cybersecurity tasks.
+*   **Dynamic Content (`dynamic_content.yml`):** Generate current/relative dates and times, or run shell commands.
+*   **Forms (`forms.yml`):** Interactive forms, such as the SBI feedback form.
+*   **General (`general.yml`):** Frequently used simple text expansions, acronyms, and common phrases.
+*   **Media (`media.yml`):** Insert static images, emojis, or use scripts to copy images to the clipboard (e.g., NASA meatball logo).
+*   **Microsoft (`microsoft.yml`):** Shortcuts for Microsoft applications and services.
+*   **Schedule (`schedule.yml`):** The `jgdaily` snippet provides a detailed daily agenda by running a Python script that pulls meeting information (hardcoded in the script) and ToDo items (from a local `review.md` file).
 
 ## Espanso
 
@@ -34,4 +39,13 @@ Espanso is an open-source, cross-platform text expander that helps you save time
 
 ## Usage
 
-To use these snippets, you need to have Espanso installed and this `base.yml` file placed in the Espanso user configuration directory. Refer to the official Espanso documentation for installation and configuration instructions.
+1.  **Install Espanso:** If you haven't already, download and install Espanso from [espanso.org](https://espanso.org).
+2.  **Place Configuration:**
+    *   Copy the `base.yml` file and the entire `user/` directory into your Espanso configuration path.
+        *   **Windows:** `%APPDATA%\espanso` (e.g., `C:\Users\YourUser\AppData\Roaming\espanso`)
+        *   **macOS:** `~/Library/Application Support/espanso` (or `~/config/espanso` if XDG compliant)
+        *   **Linux:** `~/.config/espanso`
+    *   Ensure that `base.yml` is in the root of your Espanso configuration directory (e.g., `espanso/base.yml`) and the `user` directory is at the same level (e.g., `espanso/user/`).
+3.  **Restart Espanso:** Espanso usually detects changes automatically, but a restart might be necessary.
+
+The `base_archive.yml` file is not needed for operation but is kept as a reference to the original, single-file configuration.
