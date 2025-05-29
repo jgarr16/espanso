@@ -1,0 +1,52 @@
+# Snippets that trigger forms
+matches:
+
+  - triggers: 
+    - "SBI - "
+    - "sbi - "
+    replace: |
+      SBI - {{form.employee}} | {{form.feedback}} | Situation: {{form.situation}} | Behavior: {{form.behavior}} | Impact: {{form.impact}}
+    vars:
+      - name: form
+        type: form
+        params:
+          layout: |
+            Employee Name:
+            [[employee]]
+            Feedback Type:
+            [[feedback]]
+            Situation:
+            [[situation]]
+            Behavior:
+            [[behavior]]
+            Impact:
+            [[impact]]
+          fields:
+            employee:
+              type: choice
+              values:
+                - Bill
+                - Christine
+                - Gulsum
+                - John S.
+                - Justin G.
+                - Justin H.
+                - Kirsten
+                - Michael
+            feedback:
+              type: choice
+              values:
+                - Positive
+                - Negative
+            situation:
+              type: text
+              multiline: true
+              default: "In a meeting "
+            behavior:
+              type: text
+              multiline: true
+              default: "Employee was helpful"
+            impact:
+              type: text
+              multiline: true
+              default: "Employee made everyone feel welcome"
