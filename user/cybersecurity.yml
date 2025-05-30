@@ -6,3 +6,6 @@ matches:
 
   - trigger: "jgpriority"
     replace: "The Priority field for this POA&M is blank; please update the Priority and let me know once it's adjusted. If you are unable to update it 'in place', let me know and I'll return the POA&M."
+
+  - trigger: "jgssp"
+    replace: "System Security Plan (SSP)"
